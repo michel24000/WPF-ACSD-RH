@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="WPF_ACSD_RH.Views.FondListeDemandeConges"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_ACSD_RH.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" Margin="10" Orientation="Vertical">
+
+            <Label Content="Liste des demandes de congès" HorizontalAlignment="Center" FontSize="25" Margin="0 0 0 20"/>
+
+            <StackPanel Visibility="{Binding FiltreRechercheConges}" Orientation="Horizontal" Margin="0 0 0 30" HorizontalAlignment="Center">
+                <Label Content="Centres :"/>
+                <ComboBox Text="Etablissements" Margin="0 0 20 0" ItemsSource="{Binding ListeEtablissement}" SelectedItem="{Binding EtablissementSelectionne, Mode=TwoWay}" IsReadOnly="True" Width="116">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Mois :"/>
+                <ComboBox Margin="0 0 20 0" ItemsSource="{Binding ListeMois }" SelectedItem="{Binding MoisSelectionne, Mode=TwoWay}" IsReadOnly="True" Width="86">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Décisions :"/>
+                <ComboBox Margin="0 0 20 0" ItemsSource="{Binding ListeDecision }" SelectedItem="{Binding DecisionSelectionne, Mode=TwoWay}" IsReadOnly="True" Width="83">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Button Content=" Filtrer les demandes " Command="{Binding CommandFiltrerDemandeConges}" Margin="0 0 20 0"/>
+            </StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"  Content="Valider" Command="{Binding CommmandValiderConges}" IsEnabled="{Binding BtnValider}"/>
+                <Button Grid.Column="1"  Content="Refuser" Command="{Binding CommmandRefuserConges}" IsEnabled="{Binding BtnRefuser}"/>
+                <Button Grid.Column="2"  Content="Refuser" Command="{Binding CommmandAnnulerConges}"/>
+                <Button Grid.Column="3"  Content="Supprimer" Command="{Binding CommmandSupprimerConges}" IsEnabled="{Binding BtnSupprimer}"/>
+            </Grid>
+
+            <ListView Name="ListeConges" ItemsSource="{Binding ListeConges}" SelectedItem="{Binding CongesSelectionne, Mode=TwoWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Centre" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Etablissement}" HorizontalAlignment="Left"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Prenom" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Prenom}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Nom" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Nom}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Date Début" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DateDebut}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Date de fin" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DateFin}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Congès" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NbJoursConges}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Récupération" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NbJoursRecuperations}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Décision" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Decision}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Motif du refus" Width="100">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MotifRefus}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

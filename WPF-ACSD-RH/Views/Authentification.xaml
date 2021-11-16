@@ -1,0 +1,292 @@
+﻿<Window x:Class="WPF_ACSD_RH.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ACSD_RH"
+        mc:Ignorable="d"
+        Title="Authentification" 
+        MinHeight="650" MinWidth="600" Background="#FFD5DBE2" 
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" 
+                                   SnapsToDevicePixels="true" 
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                   StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" 
+                         Color="#FFDDDDDD"/>
+
+        <SolidColorBrush x:Key="Button.Static.Border" 
+                         Color="#FF707070"/>
+
+        <SolidColorBrush x:Key="Button.MouseOver.Background" 
+                         Color="#FFBEE6FD"/>
+
+        <SolidColorBrush x:Key="Button.MouseOver.Border" 
+                         Color="#FF3C7FB1"/>
+
+        <SolidColorBrush x:Key="Button.Pressed.Background" 
+                         Color="#FFC4E5F6"/>
+
+        <SolidColorBrush x:Key="Button.Pressed.Border" 
+                         Color="#FF2C628B"/>
+
+        <SolidColorBrush x:Key="Button.Disabled.Background" 
+                         Color="#FFF4F4F4"/>
+
+        <SolidColorBrush x:Key="Button.Disabled.Border" 
+                         Color="#FFADB2B5"/>
+
+        <SolidColorBrush x:Key="Button.Disabled.Foreground"
+                         Color="#FF838383"/>
+
+        <Style x:Key="RoundedButtonStyle" 
+               TargetType="{x:Type Button}">
+
+            <Setter Property="FocusVisualStyle" 
+                    Value="{StaticResource FocusVisual}"/>
+
+            <Setter Property="Background"
+                    Value="{StaticResource Button.Static.Background}"/>
+
+            <Setter Property="BorderBrush" 
+                    Value="{StaticResource Button.Static.Border}"/>
+
+            <Setter Property="Foreground" 
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+
+            <Setter Property="BorderThickness" 
+                    Value="0"/>
+
+            <Setter Property="HorizontalContentAlignment" 
+                    Value="Center"/>
+
+            <Setter Property="VerticalContentAlignment" 
+                    Value="Center"/>
+
+            <Setter Property="Padding" 
+                    Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                                CornerRadius="10" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" 
+                                     Value="true">
+
+                                <Setter Property="BorderBrush" 
+                                        TargetName="border" 
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="true">
+
+                                <Setter Property="Background" 
+                                        TargetName="border" 
+                                        Value="{StaticResource Button.MouseOver.Background}"/>
+
+                                <Setter Property="BorderBrush" 
+                                        TargetName="border" 
+                                        Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" 
+                                     Value="true">
+
+                                <Setter Property="Background" 
+                                        TargetName="border" 
+                                        Value="{StaticResource Button.Pressed.Background}"/>
+
+                                <Setter Property="BorderBrush" 
+                                        TargetName="border" 
+                                        Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" 
+                                     Value="false">
+
+                                <Setter Property="Background" 
+                                        TargetName="border" 
+                                        Value="{StaticResource Button.Disabled.Background}"/>
+
+                                <Setter Property="BorderBrush" 
+                                        TargetName="border" 
+                                        Value="{StaticResource Button.Disabled.Border}"/>
+
+                                <Setter Property="TextElement.Foreground" 
+                                        TargetName="contentPresenter" 
+                                        Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!--Début du Grid Principal-->
+    <Grid Margin="0,90,0,0" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <!-- Logo -->
+            <RowDefinition Height="Auto"/>
+            <!-- Intitulé -->
+            <RowDefinition Height="Auto"/>
+            <!-- Authentifiez-vous -->
+            <RowDefinition Height="Auto"/>
+            <!-- Formulaire -->
+            <RowDefinition Height="Auto"/>
+            <!-- Mot de passe oublié -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0"
+               Height="120"
+               MaxWidth="600"
+               Source="/Images/Authentification_logo.png"/>
+
+        <Label Grid.Row="1" 
+               Content="GESTION DE RESSOURCES HUMAINES"   
+               FontWeight="DemiBold" 
+               FontFamily="Justleft Hand" 
+               Foreground="#EE781E" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               Margin="0 0 0 90">
+        </Label>
+
+        <Label Grid.Row="2" 
+               Content="Authentifiez-vous"  
+               Foreground="#5F6977" 
+               FontWeight="ExtraBold" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" >
+        </Label>
+
+        <Grid Grid.Row="3">
+            <!-- Définition d'un tableau pour structurer les champs de formulaire-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <!-- Email -->
+                <RowDefinition Height="Auto"/>
+                <!-- TextBox Email -->
+                <RowDefinition Height="Auto"/>
+                <!-- Motde passe-->
+                <RowDefinition Height="Auto"/>
+                <!-- TextBox Mot de passe -->
+                <RowDefinition Height="Auto"/>
+                <!-- Bouton de connexion -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Bordure encadrant le form -->
+            <Border BorderBrush="#EE781E" 
+                    BorderThickness="6" 
+                    CornerRadius="20"  
+                    Grid.Column="0" 
+                    Grid.RowSpan="5" 
+                    MaxWidth="300">
+            </Border>
+
+            <Label Content="Email" 
+                   Foreground="#4656A1" 
+                   Grid.Row="0"                     
+                   Margin="0 15 0 0" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   FontSize="15">
+            </Label>
+
+            <TextBox  x:Name="emailTexbox"
+                      Height="24" 
+                      Grid.Row="1"                        
+                      Width="200" 
+                      Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      Background="White" 
+                      Foreground="#5F6977" 
+                      FontWeight="Bold" 
+                      FontSize="12" 
+                      VerticalAlignment="Center">
+
+                <!--permet le binding l'execution de la commande sur la pression du bouton entrée-->
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding commmandSeConnecter}"
+                                CommandParameter="{Binding ElementName=passwordTexbox}" 
+                                Key="Return" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Label Content="Mot de passe" 
+                   FontSize="15" Grid.Row="2"                    
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Foreground="#4656A1">
+            </Label>
+
+            <PasswordBox Grid.Row="3"
+                        Name="passwordTexbox"
+                        Height="24"                     
+                        Width="200" 
+                        PasswordChar="x"     
+                        Background="White" 
+                        Foreground="#5F6977" 
+                        FontWeight="Bold" 
+                        FontSize="12" VerticalContentAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <!--permet le binding l'execution de la commande sur la pression du bouton entrée-->
+                <PasswordBox.InputBindings>
+                    <KeyBinding Command="{Binding commmandSeConnecter}"  
+                                CommandParameter="{Binding ElementName=passwordTexbox}"                                 
+                                Key="Return" />
+                </PasswordBox.InputBindings>
+            </PasswordBox>
+            <TextBox Grid.Row="3" Name="passwordTexbox2" Height="24" Width="200" Visibility="Collapsed" VerticalContentAlignment="Center" />
+            <!--supperpose le passwordbox -->
+
+            <Image Grid.Row="3"
+                Height="24"  Margin="174 0 0 0"
+                Source="../Images/oeil.png" 
+                HorizontalAlignment="Center"/>
+
+            <CheckBox Grid.Row="3" Unchecked="ShowPassword_Unchecked"  Checked="ShowPassword_Checked" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="174 0 0 0" Panel.ZIndex="1" Opacity="0" />
+
+            <Button Content="Connexion" 
+                    Background="white" 
+                    BorderBrush="#4656A1" 
+                    BorderThickness="2" 
+                    Foreground="#EE781E" 
+                    FontWeight="DemiBold" 
+                    Grid.Row="4" 
+                    Grid.Column="1" 
+                    Height="23" 
+                    Width="100" 
+                    Margin="0 30" 
+                    VerticalAlignment="Center" 
+                    Command="{Binding commmandSeConnecter}" 
+                    Style="{DynamicResource RoundedButtonStyle}"
+                    CommandParameter="{Binding ElementName=passwordTexbox}"/>
+        </Grid>
+        <Label Grid.Row="4" HorizontalAlignment="Center">
+            <Hyperlink Command="{Binding commandReinitialiserMdp}">
+                <TextBlock Text="Mot de passe oublié ?" />
+            </Hyperlink>
+        </Label>
+    </Grid>
+</Window>

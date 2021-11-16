@@ -1,0 +1,99 @@
+﻿<Window x:Class="WPF_ACSD_RH.Views.ReinitMdp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ACSD_RH.Views"
+        mc:Ignorable="d"
+        Title="Réinitialiser votre Mot de passe"
+        MinHeight="650" MinWidth="600" Background="#FFD5DBE2" 
+        WindowStartupLocation="CenterScreen">
+
+    <!--Début du Grid Principal-->
+    <Grid Margin="0,90,0,0" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <!-- Logo -->
+            <RowDefinition Height="Auto"/>
+            <!-- Intitulé -->
+            <RowDefinition Height="Auto"/>
+            <!-- Authentifiez-vous -->
+            <RowDefinition Height="Auto"/>
+            <!-- Mot de passe oublié -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0"
+               Height="120"
+               MaxWidth="600"
+               Source="/Images/Authentification_logo.png"/>
+
+        <Label Grid.Row="1" 
+               Content="GESTION DE RESSOURCES HUMAINES"   
+               FontWeight="DemiBold" 
+               FontFamily="Justleft Hand" 
+               Foreground="#EE781E" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               Margin="0 0 0 90">
+        </Label>
+
+        <Label Grid.Row="2" 
+               Content="Réinitialiser son mot de passe"  
+               Foreground="#5F6977" 
+               FontWeight="ExtraBold" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" >
+        </Label>
+
+
+        <Border BorderBrush="#EE781E" 
+                    BorderThickness="6" 
+                    CornerRadius="20"                                          
+                    MaxWidth="300"
+                    MinWidth="300"
+                    Grid.Row="3" 
+                HorizontalAlignment="Center">
+
+            <StackPanel Margin="20">
+                <Label Content="Email" 
+                       Foreground="#4656A1"                                                                 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       FontSize="15">
+                </Label>
+
+                <TextBox x:Name="emailTexbox"
+                      Height="24"                                               
+                      Width="200" 
+                      Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      Background="White" 
+                      Foreground="#5F6977" 
+                      FontWeight="Bold" 
+                      FontSize="12" 
+                      VerticalAlignment="Center"
+                      Margin="0 0 0 20">
+
+                    <!--permet le binding l'execution de la commande sur la pression du bouton entrée-->
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding commmandReinitialiserMdp}"                                
+                                Key="Return"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <Button Content="Réinitialiser" 
+                    Background="white" 
+                    BorderBrush="#4656A1" 
+                    BorderThickness="2" 
+                    Foreground="#EE781E" 
+                    FontWeight="DemiBold" 
+                    Grid.Row="4" 
+                    Height="23" 
+                    Width="100"                      
+                    VerticalAlignment="Center" 
+                    Command="{Binding commmandReinitialiserMdp}"                     
+                    />
+                
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

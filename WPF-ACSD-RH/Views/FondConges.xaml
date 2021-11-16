@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="WPF_ACSD_RH.Views.FondConges"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_ACSD_RH.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="StyleBtnEnvoyer">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="25" Background="#FF00FD00" BorderThickness="2" BorderBrush="Black">
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="White"
+                CornerRadius="20"
+                Margin="20"
+                Grid.Row="0">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="DEMANDE DE CONGÉS" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Foreground="#5f6977" Grid.Row="0" Grid.Column="0" FontSize="15" FontFamily="arial" Content="Etablissement : " HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="0" Grid.Column="1" FontSize="15" FontFamily="arial" Height="20" Width="100" Text="{Binding Path=Etablissement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" FontWeight="Bold" />
+                <Label Foreground="#5f6977" Grid.Row="0" Grid.Column="2" FontSize="15" FontFamily="arial" Content="Fonction : " HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="0" Grid.Column="3" FontSize="15" FontFamily="arial" Height="20" Width="100" Text="{Binding Path=Fonction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" FontWeight="Bold"/>
+                <Label Foreground="#5f6977" Grid.Row="1" Grid.Column="0" FontSize="15" FontFamily="arial" Content="Nom : " HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="1" Grid.Column="1" FontSize="15" FontFamily="arial" Height="20" Width="100" Text="{Binding Path=Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" FontWeight="Bold"/>
+                <Label Foreground="#5f6977" Grid.Row="1" Grid.Column="2" FontSize="15" FontFamily="arial" Content="Prénom : " HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="1" Grid.Column="3" FontSize="15" FontFamily="arial" Height="20" Width="100" Text="{Binding Path=Prenom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" FontWeight="Bold"/>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                <Label FontSize="15" FontFamily="arial" Content="Je soussigné, "/>
+                <Label FontWeight="Bold" Foreground="#ee781e" FontSize="15" FontFamily="arial" Content="{Binding Path=Prenom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label FontWeight="Bold" Foreground="#ee781e" FontSize="15" FontFamily="arial" Content="{Binding Path=Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label FontSize="15" FontFamily="arial" Content=" , sollicite l'autorisation de m'absenter : "/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Du : "/>
+                <DatePicker Text="{Binding Path=DateDebut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayDateStart="2021-09-02" />
+                <Label Content=" au : "/>
+                <DatePicker  Text="{Binding Path=DateFin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <Grid Grid.Row="4" HorizontalAlignment="Center" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Foreground="#5f6977" FontSize="15" FontFamily="arial" Grid.Row="0" Grid.Column="1" Content="NOMBRE DE JOURS"/>
+                <Label Foreground="#5f6977" FontSize="15" FontFamily="arial" Grid.Row="1" Grid.Column="0" Content="CONGÉS ANNUELS + CONVENTIONNELS : " HorizontalAlignment="Right"/>
+                <TextBox FontSize="15" FontFamily="arial" Text="{Binding Path=CongesAnnuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Height="20" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Foreground="#5f6977" FontSize="15" FontFamily="arial" Grid.Row="2" Grid.Column="0" Content="RÉCUPERATION : " HorizontalAlignment="Right"/>
+                <TextBox FontSize="15" FontFamily="arial" Text="{Binding Path=Recuperation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Height="20" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Foreground="#5f6977" FontSize="15" FontFamily="arial" Grid.Row="3" Grid.Column="0" Content="AUTRES : " HorizontalAlignment="Right"/>
+                <TextBox FontSize="15" FontFamily="arial" Text="{Binding Path=CongesAutres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Height="20" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Foreground="#5f6977" FontSize="15" FontFamily="arial" Grid.Row="4" Grid.Column="0" Content="TOTAL : " HorizontalAlignment="Right"/>
+                <TextBox FontSize="15" FontFamily="arial" Text="{Binding Path=CongesTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Height="20" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  FontWeight="Bold" IsEnabled="False"/>
+            </Grid>
+
+            <Button Grid.Row="5" Content="Envoyer"  Style="{StaticResource StyleBtnEnvoyer}"  Command="{Binding EnvoyerDemandeConges}" FontWeight="Bold" Width="100" Height="30"/>
+
+        </Grid>
+    </Border>
+</UserControl>
